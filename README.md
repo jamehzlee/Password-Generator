@@ -18,4 +18,4 @@ https://jamehzlee.github.io/Password-Generator/
 
 ## Generated password with all four character types and a length of 20 **:**
 
-![Character sets prompt](./assets/images/generated-password.png)
+![Generated Password](./assets/images/generated-password.png)
