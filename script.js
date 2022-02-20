@@ -2,23 +2,17 @@ var lowerCase = 'abcdefghijklmnopqrstuvwxyz'.split('');
 var upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 var numerics = '0123456789'.split('');
 var specialChar = '~!@#$%^&*()_+"-=,./\|<>?;:[]{}'.split('');
-
 var charPool = []; 
 var passArray = [];
+var passwordLength = 0;
 
-function criteria() {
-  const includeLower = confirm("Would you like to include lower case letters");
-  const includeUpper = confirm("Would you like to include upper case letters");
-  const includeNum = confirm("Would you like to include numbers");
-  const includeSpec = confirm("Would you like to include special characters");
-  
-  while (passwordLength < 8 || passwordLength >128) {
-    var passwordLength = prompt("Please enter a length between 8-128 characters.");
-  }
-  console.log(criteria);
-}
-
+//Asks user which set(s) of characters to include in password
 function pickCharTypes() {
+  var includeLower = confirm("Would you like to include lower case letters?");
+  var includeUpper = confirm("Would you like to include upper case letters?");
+  var includeNum = confirm("Would you like to include numbers?");
+  var includeSpec = confirm("Would you like to include special characters?");
+  
   if (includeLower == true) {
     charPool = charPool.concat(lowerCase);
   }
@@ -31,28 +25,38 @@ function pickCharTypes() {
   if (includeSpec == true) {
     charPool = charPool.concat(specialChar);
   }
-  console.log(pickCharTypes);
 }
 
-//Generates random characters for any given length 
+//Prompts user until password length is 8-128 characters
+function lengthInput() {
+  while (passwordLength < 8 || passwordLength >128) {
+    passwordLength = prompt("Please enter a length between 8-128 characters.");
+  }
+}
+
+//Adds random character to the end of an array 
 function rollChar() {
   for (let i = 0; i < passwordLength; i++) {
     var randomNum = Math.floor(Math.random() * charPool.length);
-    var randomChar = charPool[randomNum];
-    passArray.push(randomChar);
+    passArray.push(charPool[randomNum]);
   }
-  console.log(passArray);
 }
 
+//resets global variables
+function reset() {
+  charPool = [];
+  passArray = [];
+  passwordLength = 0;
+}
+
+//Generates password array and converts to a string with no spaces
 function generatePassword() {
-  criteria();
   pickCharTypes();
+  lengthInput();
   rollChar();
-  passArray.toString();
+  var passString = passArray.join('');
+  return passString;
 }
-
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
@@ -60,9 +64,11 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
   
   passwordText.value = password;
-  charPool = [];
-  passArray = [];
+  reset();
 }
+
+// Assignment Code
+var generateBtn = document.querySelector("#generate");
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
