@@ -27,7 +27,7 @@ function pickCharTypes() {
   }
 }
 
-//Prompts user until password length is 8-128 characters
+//Prompts user until password length is 8-128 characters or they click cancel
 function lengthInput() {
   while (passwordLength < 8 || passwordLength >128) {
     passwordLength = prompt("Please enter a length between 8-128 characters.");
@@ -37,7 +37,7 @@ function lengthInput() {
   }
 }
 
-//Adds random character to the end of an array 
+//Adds random character to the end of passArray 
 function rollChar() {
   for (let i = 0; i < passwordLength; i++) {
     var randomNum = Math.floor(Math.random() * charPool.length);
@@ -45,14 +45,14 @@ function rollChar() {
   }
 }
 
-//resets global variables
+//Resets global variables
 function reset() {
   charPool = [];
   passArray = [];
   passwordLength = 0;
 }
 
-//Generates password array and converts to a string with no spaces
+//Generates a password array and converts it to a string with no spaces
 function generatePassword() {
   pickCharTypes();
   lengthInput();
