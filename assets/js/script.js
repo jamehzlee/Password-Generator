@@ -31,6 +31,9 @@ function pickCharTypes() {
 function lengthInput() {
   while (passwordLength < 8 || passwordLength >128) {
     passwordLength = prompt("Please enter a length between 8-128 characters.");
+    if (passwordLength == null) {
+      return;
+    }
   }
 }
 
